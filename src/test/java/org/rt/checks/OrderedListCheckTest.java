@@ -27,15 +27,15 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.rt.checks.annotation.RtCheck;
 import org.rt.checks.annotation.RtChecker;
-import org.rt.checks.impl.runners.RtOrderedAllCheckRunner;
 import org.rt.checks.impl.comparators.RtCheckPriorityComparator;
 import org.rt.checks.impl.comparators.RtCheckerLevelComparator;
+import org.rt.checks.impl.runners.RtOrderedAllCheckRunner;
 
 /**
  * @author dsaponenko
  */
 @RtChecker(level = RtChecker.Level.PROJECT,
-    title = "Simple list test", description = "Simple list test description")
+  title = "Simple list test", description = "Simple list test description")
 public class OrderedListCheckTest {
 
   @RtCheck(priority = RtCheck.Priority.HIGH, name = "Test 1", resolveInstruction = "See test1")
@@ -48,20 +48,20 @@ public class OrderedListCheckTest {
     final RtChecker.Level[] prevLevel = {RtChecker.Level.CORE};
     final RtCheck.Priority[] prevPriority = {RtCheck.Priority.LOWEST};
     new RtOrderedAllCheckRunner(OrderedListCheckTest.class.getPackage().getName(),
-        new RtCheckerLevelComparator(), new RtCheckPriorityComparator()).run(new BaseTestRtCheckRunListener() {
-          @Override
-          public void setUp(RtChecker checker) {
-            super.setUp(checker);
-            Assert.assertTrue(prevLevel[0].ordinal() <= checker.level().ordinal());
-            prevLevel[0] = checker.level();
-            prevPriority[0] = RtCheck.Priority.LOWEST;
-          }
+      new RtCheckerLevelComparator(), new RtCheckPriorityComparator()).run(new BaseTestRtCheckRunListener() {
+      @Override
+      public void setUp(RtChecker checker) {
+        super.setUp(checker);
+        Assert.assertTrue(prevLevel[0].ordinal() <= checker.level().ordinal());
+        prevLevel[0] = checker.level();
+        prevPriority[0] = RtCheck.Priority.LOWEST;
+      }
 
-          public void after(RtCheck check, RtCheckResult checkResult) {
-            super.after(check, checkResult);
-            Assert.assertTrue(prevPriority[0].ordinal() <= check.priority().ordinal());
-            prevPriority[0] = check.priority();
-          }
+      public void after(RtCheck check, RtCheckResult checkResult) {
+        super.after(check, checkResult);
+        Assert.assertTrue(prevPriority[0].ordinal() <= check.priority().ordinal());
+        prevPriority[0] = check.priority();
+      }
     });
   }
 }

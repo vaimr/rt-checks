@@ -33,7 +33,7 @@ import org.rt.checks.impl.runners.RtConcreteCheckRunner;
  * @author dsaponenko
  */
 @RtChecker(level = RtChecker.Level.ANOTHER,
-    title = "Incorrect method test", description = "Incorrect method description")
+  title = "Incorrect method test", description = "Incorrect method description")
 public class IncorrectMethodCheckTest {
 
   @RtCheck(priority = RtCheck.Priority.CRITICAL, name = "Test Incorrect method", resolveInstruction = "Change method signature")

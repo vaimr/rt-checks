@@ -29,13 +29,11 @@ import org.rt.checks.annotation.RtCheck;
 import org.rt.checks.annotation.RtChecker;
 import org.rt.checks.impl.runners.RtConcreteCheckRunner;
 
-import javax.annotation.Nullable;
-
 /**
  * @author dsaponenko
  */
 @RtChecker(level = RtChecker.Level.CORE,
-    title = "Simple test", description = "Simple test description")
+  title = "Simple test", description = "Simple test description")
 public class SimpleCheckTest {
 
   @RtCheck(priority = RtCheck.Priority.LOWEST, name = "Test 1", resolveInstruction = "See test1")

@@ -36,7 +36,7 @@ import java.util.Set;
  * @author dsaponenko
  */
 @RtChecker(level = RtChecker.Level.CORE,
-    title = "Simple list test", description = "Simple list test description")
+  title = "Simple list test", description = "Simple list test description")
 public class SimpleListCheckTest {
 
   @RtCheck(priority = RtCheck.Priority.LOWEST, name = "Test 1", resolveInstruction = "See test1")
@@ -51,13 +51,13 @@ public class SimpleListCheckTest {
     checkers.add(SimpleCheckTest.class);
     checkers.add(SimpleListCheckTest.class);
     new RtListCheckRunner(checkers).
-        run(new BaseTestRtCheckRunListener() {
-          @Override
-          public void setUp(RtChecker checker) {
-            super.setUp(checker);
-            setupCounter[0]++;
-          }
-        });
+      run(new BaseTestRtCheckRunListener() {
+        @Override
+        public void setUp(RtChecker checker) {
+          super.setUp(checker);
+          setupCounter[0]++;
+        }
+      });
 
     Assert.assertEquals(2, setupCounter[0]);
   }

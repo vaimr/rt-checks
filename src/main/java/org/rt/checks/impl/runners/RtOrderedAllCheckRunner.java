@@ -43,7 +43,7 @@ public class RtOrderedAllCheckRunner extends RtListCheckRunner {
    * Constructor
    *
    * @param packagePrefix Checkers package prefix
-   * @param comparator Ordering comparator
+   * @param comparator    Ordering comparator
    */
   public RtOrderedAllCheckRunner(String packagePrefix, Comparator<RtChecker> comparator) {
     super(findCheckClasses(packagePrefix, comparator));
@@ -52,9 +52,9 @@ public class RtOrderedAllCheckRunner extends RtListCheckRunner {
   /**
    * Constructor
    *
-   * @param packagePrefix Checkers package prefix
+   * @param packagePrefix     Checkers package prefix
    * @param checkerComparator Ordering checkers comparator
-   * @param checkComparator Ordering checkers checks comparator
+   * @param checkComparator   Ordering checkers checks comparator
    */
   public RtOrderedAllCheckRunner(String packagePrefix, Comparator<RtChecker> checkerComparator, Comparator<RtCheck> checkComparator) {
     super(findCheckClasses(packagePrefix, checkerComparator));
@@ -73,7 +73,7 @@ public class RtOrderedAllCheckRunner extends RtListCheckRunner {
   /**
    * Find classes in package
    *
-   * @param packagePrefix Package prefix
+   * @param packagePrefix     Package prefix
    * @param checkerComparator Comparator for checkers
    * @return Checkers classes
    */

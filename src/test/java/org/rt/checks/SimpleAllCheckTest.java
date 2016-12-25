@@ -33,7 +33,7 @@ import org.rt.checks.impl.runners.RtAllCheckRunner;
  * @author dsaponenko
  */
 @RtChecker(level = RtChecker.Level.CORE,
-    title = "Simple all test", description = "Simple all test description")
+  title = "Simple all test", description = "Simple all test description")
 public class SimpleAllCheckTest {
 
   @RtCheck(priority = RtCheck.Priority.LOWEST, name = "Test 1", resolveInstruction = "See test1")
@@ -45,13 +45,13 @@ public class SimpleAllCheckTest {
   public void runChecks() throws Exception {
     final int[] setupCounter = {0};
     new RtAllCheckRunner(SimpleAllCheckTest.class.getPackage().getName()).
-        run(new BaseTestRtCheckRunListener() {
-          @Override
-          public void setUp(RtChecker checker) {
-            super.setUp(checker);
-            setupCounter[0]++;
-          }
-        });
+      run(new BaseTestRtCheckRunListener() {
+        @Override
+        public void setUp(RtChecker checker) {
+          super.setUp(checker);
+          setupCounter[0]++;
+        }
+      });
 
     Assert.assertEquals(5, setupCounter[0]);
   }
