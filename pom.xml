@@ -22,13 +22,12 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>io.github.vaimr</groupId>
   <artifactId>rt-checks</artifactId>
-  <version>1.1-SNAPSHOT</version>
+  <version>1.1</version>
   <name>Runtime checks</name>
   <url>https://github.com/vaimr/rt-checks</url>
   <description>Simple library for write configuration, state and etc. checks and run in runtime
@@ -50,7 +49,7 @@ THE SOFTWARE.
     <connection>scm:git:git@github.com:vaimr/rt-checks.git</connection>
     <developerConnection>scm:git:git@github.com:vaimr/rt-checks.git</developerConnection>
     <url>https://github.com/vaimr/rt-checks</url>
-    <tag>HEAD</tag>
+    <tag>rt-checks-1.1</tag>
   </scm>
   <distributionManagement>
     <snapshotRepository>
