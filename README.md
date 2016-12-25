@@ -100,7 +100,7 @@ public class AppCheck {
 ```
 
 # Versions
-1.1 - Published in public repo https://oss.sonatype.org/content/groups/public/io/github/vaimr/rt-checks/1.1/
+1.1 - Published in [Central Maven Repository](https://repo1.maven.org/maven2/io/github/vaimr/rt-checks/1.1/)
 
 # Authors
 * **Saponenko Denis** - *Initial work* - [vaimr](https://github.com/vaimr)
