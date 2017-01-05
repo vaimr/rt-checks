@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/vaimr/rt-checks.svg?branch=master)](https://travis-ci.org/vaimr/rt-checks)
+
 # Motivation
 When the project is run in many environments with different configurations always have problems with missed configs, code version, and so on. 
 
