@@ -27,7 +27,7 @@ THE SOFTWARE.
 
   <groupId>io.github.vaimr</groupId>
   <artifactId>rt-checks</artifactId>
-  <version>1.2</version>
+  <version>1.3-SNAPSHOT</version>
   <name>Runtime checks</name>
   <url>https://github.com/vaimr/rt-checks</url>
   <description>Simple library for write configuration, state and etc. checks and run in runtime
@@ -49,7 +49,7 @@ THE SOFTWARE.
     <connection>scm:git:git@github.com:vaimr/rt-checks.git</connection>
     <developerConnection>scm:git:git@github.com:vaimr/rt-checks.git</developerConnection>
     <url>https://github.com/vaimr/rt-checks</url>
-    <tag>rt-checks-1.2</tag>
+    <tag>HEAD</tag>
   </scm>
   <distributionManagement>
     <snapshotRepository>
