@@ -100,9 +100,56 @@ public class AppCheck {
       }
     });
 ```
+#### Run localized checks
+Specify msgBundle annotation argument - resource bundle name. Write to annotations arguments localized message keys from resource bundles
+
+Checker sample:
+```java
+    @RtChecker(msgBundle = "MyProject", title = "localizedCheckTitle")
+    public class LocalizedCheck {
+      @RtCheck(name = "myProjectCheckName", resolveInstruction = "myProjectCheckInstruction")
+      RtCheckResult configCheck() {
+        // check
+        return RtCheckResult.ACCEPT;
+      }
+    }
+```   
+
+Sample checks runner:
+```java    
+    new RtConcreteCheckRunner(LocalizedCheck.class).run(new RtCheckRunListenerAdapter() {
+      private final ResourceBundle bundle = ResourceBundle.getBundle("MyProject");
+      @Override
+      public void setUp(RtChecker checker) {
+        // Output localized Checker title
+        System.out.println(bundle.getString(checker.title()));
+      }
+
+      /**
+       * Main method. Invoke after every check.
+       *
+       * @param check       Check configuration
+       * @param checkResult Check result
+       */
+      public void after(RtCheck check, RtCheckResult checkResult) {
+        // Output localized Check name and resolve description
+        System.out.println(bundle.getString(check.name()));
+        System.out.println(bundle.getString(check.resolveInstruction()));
+      }
+    });
+
+```
+
+Sample bundle MyProject_en.properties:
+```ini
+    localizedCheckTitle=My project configuration check
+    myProjectCheckName=Check config param
+    myProjectCheckInstruction=Add param "dbUrl" to "app.config"
+```
 
 # Versions
 1.1 - Published in [Central Maven Repository](https://repo1.maven.org/maven2/io/github/vaimr/rt-checks/1.1/)
+1.2 - Added msgBundle param to RtChecker annotation for localization checks
 
 # Authors
 * **Saponenko Denis** - *Initial work* - [vaimr](https://github.com/vaimr)

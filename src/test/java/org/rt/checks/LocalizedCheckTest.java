@@ -29,34 +29,40 @@ import org.rt.checks.annotation.RtCheck;
 import org.rt.checks.annotation.RtChecker;
 import org.rt.checks.impl.runners.RtConcreteCheckRunner;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 /**
+ * Sample usage i18n in checks
+ *
  * @author dsaponenko
  */
-@RtChecker(level = RtChecker.Level.CORE,
-  title = "Simple test", description = "Simple test description")
-public class SimpleCheckTest {
+@RtChecker(level = RtChecker.Level.CORE, msgBundle = "test",
+  title = "localizedCheckTitle", description = "localizedCheckDescription")
+public class LocalizedCheckTest {
+  private static final ResourceBundle bundle = ResourceBundle.getBundle("test", Locale.ENGLISH);
 
-  @RtCheck(priority = RtCheck.Priority.LOWEST, name = "Test 1", resolveInstruction = "See test1")
+  @RtCheck(name = "test1Name", resolveInstruction = "test1Description")
   RtCheckResult test1() {
     return RtCheckResult.ACCEPT;
   }
 
-  @RtCheck(name = "Test 2", resolveInstruction = "See test2")
-  RtCheckResult test2() {
-    return RtCheckResult.FAILED;
-  }
-
   @Test
   public void runChecks() throws Exception {
-    new RtConcreteCheckRunner(SimpleCheckTest.class).run(new BaseTestRtCheckRunListener() {
+    new RtConcreteCheckRunner(LocalizedCheckTest.class).run(new BaseTestRtCheckRunListener() {
+      @Override
+      public void setUp(RtChecker checker) {
+        super.setUp(checker);
+        Assert.assertEquals("Localization test", bundle.getString(checker.title()));
+      }
+
       public void after(RtCheck check, RtCheckResult checkResult) {
         super.after(check, checkResult);
-        if (check.priority() == RtCheck.Priority.LOWEST) {
-          Assert.assertEquals(RtCheckResult.ACCEPT, checkResult);
-        } else {
-          Assert.assertEquals(RtCheckResult.FAILED, checkResult);
-        }
+        Assert.assertEquals(RtCheckResult.ACCEPT, checkResult);
+        Assert.assertEquals("Localization check test", bundle.getString(check.name()));
       }
     });
   }
 }
+
+

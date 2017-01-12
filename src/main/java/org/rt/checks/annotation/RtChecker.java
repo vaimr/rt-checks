@@ -39,7 +39,7 @@ public @interface RtChecker {
   /**
    * Check level
    */
-  public enum Level {
+  enum Level {
     CORE,
     CONFIGURATION,
     APPLICATION,
@@ -50,6 +50,13 @@ public @interface RtChecker {
     PROJECT,
     ANOTHER
   }
+
+  /**
+   * Message bundle name for localize checks
+   *
+   * @return Bundle name
+   */
+  String msgBundle() default "";
 
   /**
    * Return check level
