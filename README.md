@@ -149,6 +149,7 @@ Sample bundle MyProject_en.properties:
 
 # Versions
 1.1 - Published in [Central Maven Repository](https://repo1.maven.org/maven2/io/github/vaimr/rt-checks/1.1/)
+
 1.2 - Added msgBundle param to RtChecker annotation for localization checks
 
 # Authors
