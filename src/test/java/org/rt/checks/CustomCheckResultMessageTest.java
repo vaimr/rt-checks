@@ -27,32 +27,29 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.rt.checks.annotation.RtCheck;
 import org.rt.checks.annotation.RtChecker;
-import org.rt.checks.impl.runners.RtAllCheckRunner;
+import org.rt.checks.impl.runners.RtConcreteCheckRunner;
 
 /**
- * @author dsaponenko
+ * Created by dsaponenko on 20.01.17.
  */
-@RtChecker(level = RtChecker.Level.CORE,
-  title = "Simple all test", description = "Simple all test description")
-public class SimpleAllCheckTest {
+@RtChecker(title = "customMessage")
+public class CustomCheckResultMessageTest {
+  public static final String TEST_MESSAGE = "test message";
 
-  @RtCheck(priority = RtCheck.Priority.LOWEST, name = "Test 1", resolveInstruction = "See test1")
-  RtCheckResult test1() {
-    return RtCheckResult.UNSTABLE;
+  @RtCheck(name = "check", resolveInstruction = "")
+  public RtCheckResult check() {
+    return RtCheckResult.accept(TEST_MESSAGE);
   }
 
   @Test
-  public void runChecks() throws Exception {
-    final int[] setupCounter = {0};
-    new RtAllCheckRunner(SimpleAllCheckTest.class.getPackage().getName()).
-      run(new BaseTestRtCheckRunListener() {
-        @Override
-        public void setUp(RtChecker checker) {
-          super.setUp(checker);
-          setupCounter[0]++;
-        }
-      });
+  public void test() throws Exception {
+    RtConcreteCheckRunner runner = new RtConcreteCheckRunner(getClass());
+    runner.run(new RtCheckRunListenerAdapter() {
+      @Override
+      public void after(RtCheck check, RtCheckResult checkResult) {
+        Assert.assertEquals(TEST_MESSAGE, checkResult.getMessage());
+      }
+    });
 
-    Assert.assertEquals(8, setupCounter[0]);
   }
 }

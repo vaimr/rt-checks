@@ -1,5 +1,11 @@
 [![Build Status](https://travis-ci.org/vaimr/rt-checks.svg?branch=master)](https://travis-ci.org/vaimr/rt-checks)
 
+# Table of Contents
+**[Motivation](#motivation)**  
+**[How it works](#how-it-works)**  
+**[Usage sample](#usage-sample)**  
+**[Next Steps, Versions, Authors, License](#versions)** 
+
 # Motivation
 When the project is run in many environments with different configurations always have problems with missed configs, code version, and so on. 
 
@@ -147,10 +153,46 @@ Sample bundle MyProject_en.properties:
     myProjectCheckInstruction=Add param "dbUrl" to "app.config"
 ```
 
+#### Check results with dynamically messages
+For return custom message with check result use static methods from RtCheckResult (failure(""), accetp("")...)
+
+Example:
+```java
+      @RtCheck(name = "myProjectCheckName", resolveInstruction = "myProjectCheckInstruction")
+      RtCheckResult configCheck() {
+        return RtCheckResult.accept("Custom message");
+      }
+    }
+```
+
+#### Ignore checkers and concrete checks
+For ignore checks exist annotation RtCheckIgnore
+
+Sample in checker usage:
+```java
+    @RtCheckIgnore // This checker with all the checks will be ignored
+    @RtChecker(title = "Ignored test")
+    public class IgnoreChecker {
+    }
+}
+```   
+
+Sample in checks usage:
+```java
+    @RtCheckIgnore // This concrete check will be ignored
+    @RtCheck(name = "ignoredCheck", resolveInstruction = "")
+    public RtCheckResult ignoredCheck() {
+      return RtCheckResult.FAILED;
+    }
+}
+```   
+
 # Versions
 1.1 - Published in [Central Maven Repository](https://repo1.maven.org/maven2/io/github/vaimr/rt-checks/1.1/)
 
 1.2 - Added msgBundle param to RtChecker annotation for localization checks
+
+1.3 - Custom messages in RtCheckResult and ignorable checkers and checks
 
 # Authors
 * **Saponenko Denis** - *Initial work* - [vaimr](https://github.com/vaimr)
