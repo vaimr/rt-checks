@@ -27,6 +27,7 @@ import org.rt.checks.RtCheckResult;
 import org.rt.checks.RtCheckRunListener;
 import org.rt.checks.RtCheckRunner;
 import org.rt.checks.annotation.RtCheck;
+import org.rt.checks.annotation.RtCheckIgnore;
 import org.rt.checks.annotation.RtChecker;
 
 import java.lang.reflect.Method;
@@ -59,6 +60,10 @@ public class RtConcreteCheckRunner implements RtCheckRunner {
    * @param listener Process listener
    */
   public void run(RtCheckRunListener listener) {
+    RtCheckIgnore checkIgnore = (RtCheckIgnore) aClass.getAnnotation(RtCheckIgnore.class);
+    if (checkIgnore != null) {
+      return;
+    }
     RtChecker checker = (RtChecker) aClass.getAnnotation(RtChecker.class);
     RtCheck check = null;
     try {
@@ -66,6 +71,9 @@ public class RtConcreteCheckRunner implements RtCheckRunner {
       listener.setUp(checker);
       Collection<Method> methods = getMethods(aClass);
       for (Method method : methods) {
+        if (method.getAnnotation(RtCheckIgnore.class) != null) {
+          return;
+        }
         check = method.getAnnotation(RtCheck.class);
         listener.before(check);
 

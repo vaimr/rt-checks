@@ -53,6 +53,6 @@ public class SimpleAllCheckTest {
         }
       });
 
-    Assert.assertEquals(6, setupCounter[0]);
+    Assert.assertEquals(7, setupCounter[0]);
   }
 }

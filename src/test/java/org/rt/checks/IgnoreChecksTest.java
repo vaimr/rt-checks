@@ -23,30 +23,39 @@
  */
 package org.rt.checks;
 
+import org.junit.Assert;
+import org.junit.Test;
 import org.rt.checks.annotation.RtCheck;
+import org.rt.checks.annotation.RtCheckIgnore;
 import org.rt.checks.annotation.RtChecker;
+import org.rt.checks.impl.runners.RtConcreteCheckRunner;
 
 /**
  * @author dsaponenko
  */
-public class BaseTestRtCheckRunListener implements RtCheckRunListener {
-  public void setUp(RtChecker checker) {
-    System.out.println(checker.title() + " (" + checker.level() + "). " + checker.description());
+@RtChecker(title = "Ignored test")
+public class IgnoreChecksTest {
+
+  @RtCheck(name = "invokableCheck", resolveInstruction = "")
+  public RtCheckResult invokableCheck() {
+    return RtCheckResult.ACCEPT;
   }
 
-  public void before(RtCheck check) {
-    System.out.print("  " + check.name() + " (" + check.priority() + "): ");
+  @RtCheckIgnore
+  @RtCheck(name = "ignoredCheck", resolveInstruction = "")
+  public RtCheckResult ignoredCheck() {
+    return RtCheckResult.FAILED;
   }
 
-  public void after(RtCheck check, RtCheckResult checkResult) {
-    System.out.println(checkResult.getName() + " | " + check.resolveInstruction());
-  }
+  @Test
+  public void test() throws Exception {
+    RtConcreteCheckRunner runner = new RtConcreteCheckRunner(this.getClass());
+    runner.run(new RtCheckRunListenerAdapter() {
+      @Override
+      public void after(RtCheck check, RtCheckResult checkResult) {
+        Assert.assertEquals(RtCheckResult.ACCEPT, checkResult);
+      }
+    });
 
-  public void tearDown(RtChecker checker) {
-    System.out.println("-----------------------------------");
-  }
-
-  public void error(RtChecker checker, RtCheck check, Exception ex) {
-    System.out.println(ex.getMessage());
   }
 }

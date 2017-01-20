@@ -23,11 +23,138 @@
  */
 package org.rt.checks;
 
+import javax.annotation.Nullable;
+
 /**
- * Check result enumeration
+ * Check result bean
  *
  * @author dsaponenko
  */
-public enum RtCheckResult {
-  ACCEPT, UNSTABLE, FAILED, SKIPPED, INACTIVE
+public class RtCheckResult {
+
+  /**
+   * Check result name
+   */
+  public enum Name {
+    ACCEPT, UNSTABLE, FAILED, SKIPPED, INACTIVE
+  }
+
+  /**
+   * Accept result constant
+   */
+  public static final RtCheckResult ACCEPT = accept("");
+  /**
+   * Unstable result constant
+   */
+  public static final RtCheckResult UNSTABLE = unstable("");
+  /**
+   * Failed result constant
+   */
+  public static final RtCheckResult FAILED = failed("");
+  /**
+   * Skipped result constant
+   */
+  public static final RtCheckResult SKIPPED = skipped("");
+  /**
+   * Inactive result constant
+   */
+  public static final RtCheckResult INACTIVE = inactive("");
+
+  private Name name;
+  private String message;
+
+  /**
+   * Constructor
+   *
+   * @param name Check result name
+   * @param message Check result message
+   */
+  protected RtCheckResult(Name name, String message) {
+    this.name = name;
+    this.message = message;
+  }
+
+  /**
+   * Return accept check result with message
+   *
+   * @param message Message
+   * @return Check result
+   */
+  public static RtCheckResult accept(String message) {
+    return new RtCheckResult(Name.ACCEPT, message);
+  }
+
+  /**
+   * Return unstable check result with message
+   *
+   * @param message Message
+   * @return Check result
+   */
+  public static RtCheckResult unstable(String message) {
+    return new RtCheckResult(Name.UNSTABLE, message);
+  }
+
+  /**
+   * Return failed check result with message
+   *
+   * @param message Message
+   * @return Check result
+   */
+  public static RtCheckResult failed(String message) {
+    return new RtCheckResult(Name.FAILED, message);
+  }
+
+  /**
+   * Return skipped check result with message
+   *
+   * @param message Message
+   * @return Check result
+   */
+  public static RtCheckResult skipped(String message) {
+    return new RtCheckResult(Name.SKIPPED, message);
+  }
+
+  /**
+   * Return inactive check result with message
+   *
+   * @param message Message
+   * @return Check result
+   */
+  public static RtCheckResult inactive(String message) {
+    return new RtCheckResult(Name.INACTIVE, message);
+  }
+
+  /**
+   * Return Check result name
+   *
+   * @return Check result name
+   */
+  public Name getName() {
+    return name;
+  }
+
+  /**
+   * Return check result message
+   *
+   * @return Message
+   */
+  @Nullable
+  public String getMessage() {
+    return message;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof RtCheckResult)) return false;
+
+    RtCheckResult result = (RtCheckResult) o;
+
+    return name == result.name;
+  }
+
+  @Override
+  public int hashCode() {
+    return name.hashCode();
+  }
 }
